@@ -1,10 +1,9 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUpcomingEvents } from '../utils/calendar';
 
 const Home = () => {
   const { t } = useTranslation();
-  const { events: upcomingActivities, loading, error } = useUpcomingEvents(4);
+  const { events: upcomingActivities, loading } = useUpcomingEvents(4);
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">

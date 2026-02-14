@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 // Placeholder for staff images - using animal emojis as requested for now

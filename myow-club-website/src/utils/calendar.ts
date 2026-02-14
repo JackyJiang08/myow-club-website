@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 // 2. Get a Google Calendar API Key from Google Cloud Console.
 // 3. Replace 'YOUR_API_KEY' below with your actual key.
 
-const GOOGLE_CALENDAR_ID = 'c_84c7a88801d3f777c9d8919feac1f66eea1a56d837a9d7a86706fe930586d4d5@group.calendar.google.com';
 const API_KEY = ''; // Leave empty to use mock data, or fill in to fetch real data
 
 export interface CalendarEvent {
