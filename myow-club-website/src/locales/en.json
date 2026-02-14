@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "home": "Home",
+    "calendar": "Calendar",
+    "activities": "Activities",
+    "staff": "Leadership",
+    "about": "About",
+    "store": "Store",
+    "membership": "Membership",
+    "admin": "Admin"
+  },
+  "home": {
+    "hero_title": "MYOW DIY Club",
+    "hero_subtitle": "University of Illinois Urbana-Champaign",
+    "semester": "Spring 2026",
+    "announcements": "Announcements",
+    "upcoming": "Upcoming",
+    "schedule_deadlines": "Schedule & Deadlines",
+    "office_hours": "Office Hours",
+    "announcement_1_title": "Tuesday, Jan 20th",
+    "announcement_1_text": "Welcome to the new semester, Spring 2026!",
+    "announcement_2_title": "Friday, February 13th",
+    "announcement_2_line1": "First special event held for Valentine's Day, Pipe Cleaners Crafting,",
+    "announcement_2_line2": "Location: Grainger Engineering Library Room 401",
+    "announcement_2_line3": "Time: 5:00–7:00 PM"
+  },
+  "activities": {
+    "title": "Our Activities",
+    "pixel_beads": {
+      "title": "Pixel Beads Workshop",
+      "description_1": "Create bright, pixel-style designs using colorful fuse beads. You’ll place beads on a pattern board, then heat-set them into a finished piece you can keep, gift, or turn into a keychain or charm. It’s fun, relaxing, and perfect for beginners.",
+      "description_2": "No need to worry if you’ve never done it before: our team will guide you patiently one-on-one. You can pick a pattern on-site, or message us ahead of time and we’ll help you find a design you can finish within two hours.",
+      "description_3": ""
+    },
+    "stone_clay": {
+      "title": "Stone Clay Workshop",
+      "description_1": "Stone clay is a soft, air-dry material that’s easy to shape, then hardens into a smooth, stone-like finish. In this workshop series, you’ll design and sculpt your own figure or ornament, then paint and decorate it to match your style.",
+      "description_2": "We provide all materials and guide you through each step, so no experience is needed. Because stone clay needs time to fully dry, each project spans two sessions:",
+      "description_3": "The first session focuses on shaping your sculpture.",
+      "description_4": "The second session is for painting and finishing your piece once it’s ready."
+    },
+    "sealing_wax": {
+      "title": "Sealing Wax Workshop",
+      "description": "Add a classic, elegant touch to letters, journaling, and gift wrapping with sealing wax. You’ll learn how to melt wax safely, pour it cleanly, and press stamps for crisp, satisfying results. We’ll provide wax colors, stamps, and tools so you can experiment with different styles and create something that feels personal and polished. Whether you love aesthetics or simply want a new craft to try, this workshop is an easy and rewarding way to make your projects look instantly elevated."
+    },
+    "pipe_cleaners": {
+      "title": "Pipe Cleaners Crafting",
+      "description": "Pipe cleaners are simple, colorful, and surprisingly versatile. In this workshop, you’ll learn easy twisting and shaping techniques to create cute flowers, small decorations, charms, and mini creations you can take home the same day. It’s beginner-friendly, quick to pick up, and perfect for a relaxing social activity. You can follow guided examples or freestyle your own designs, and our team will be there to help you refine shapes and bring your ideas to life."
+    }
+  },
+  "staff": {
+    "title": "Our Leadership",
+    "click_to_see_bio": "Click to see bio",
+    "bio_placeholder": "Hi! I'm a member of the MYOW DIY Club. I love crafting and creating new things. Ask me about my favorite projects!",
+    "estella": { "name": "Estella Wang", "title": "President" },
+    "henry": { "name": "Henry Sa", "title": "Vice President" },
+    "joe": { "name": "Joe Yang", "title": "Membership Director" },
+    "yuki": { "name": "Yuki Yong", "title": "Treasurer" },
+    "anqi": { "name": "Anqi Lu", "title": "Art Director" },
+    "jacky": { "name": "Jacky Jiang", "title": "Secretary" },
+    "sihan": { "name": "Sihan Huang", "title": "Outreach Director" },
+    "mu": { "name": "Mu Li", "title": "Event Coordinator" },
+    "yaxin": { "name": "Yaxin Zheng", "title": "Event Coordinator" }
+  },
+  "about": {
+    "title": "About Us",
+    "mission_title": "Our Mission",
+    "mission_text": "Make Your Own World DIY Club is UIUC’s first student organization dedicated purely to hands-on crafts. We created this club to give students a warm, low-pressure space to take a real break from academics, meet new friends, and experience the calming, therapeutic joy of making something with their own hands.",
+    "membership_title": "Membership",
+    "membership_text": "No experience is required. We provide the materials, clear step-by-step guidance, and a supportive community that respects every student and every culture. Come as you are, create at your own pace, and leave with something uniquely yours.",
+    "paragraph_2": "Throughout the semester, we host beginner-friendly DIY workshops that explore a wide range of materials, techniques, and cultural inspirations. In past events, we’ve brought students together through pixel beads, stone clay sculpture, LEGO builds, and creative design sessions like tote bags and fans. This semester, we’re keeping our most-loved classics while adding fresh new crafts such as pipe cleaners and sealing wax, so there’s always something new to try.",
+    "paragraph_3": "From traditional crafts to modern DIY trends, we explore a wide variety of mediums throughout the semester. Join us to learn new skills, make lasting friendships, and take home unique creations that reflect your personal style.",
+    "bottom_quote": "Slow down, create with your hands, and take home a little piece of your own world."
+  },
+  "membership": {
+    "title": "Membership",
+    "subtitle": "Join our community and unlock exclusive benefits",
+    "join_now": "Join Now",
+    "event_types_title": "Types of Events",
+    "member": {
+      "name": "Member",
+      "price": "Free",
+      "feature_1": "Can join certain open events",
+      "feature_2": "$5 for specific workshops"
+    },
+    "vip": {
+      "name": "VIP",
+      "price": "$30 / year",
+      "feature_1": "Free access to all events",
+      "feature_2": "Eligible for exclusive VIP & SVIP-only workshops"
+    },
+    "svip": {
+      "name": "SVIP",
+      "price": "$45 / year",
+      "feature_1": "Free access to all events",
+      "feature_2": "Eligible for exclusive VIP & SVIP-only workshops",
+      "feature_3": "Early registration allowed",
+      "feature_4": "Securing popular spots guaranteed"
+    }
+  },
+  "store": {
+    "title": "Store",
+    "coming_soon": "Coming Soon"
+  }
+}

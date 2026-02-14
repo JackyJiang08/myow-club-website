@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "home": "首页",
+    "calendar": "日历",
+    "activities": "活动",
+    "staff": "领导团队",
+    "about": "关于我们",
+    "store": "商店",
+    "membership": "会员",
+    "admin": "管理"
+  },
+  "home": {
+    "hero_title": "MYOW DIY 俱乐部",
+    "hero_subtitle": "伊利诺伊大学厄巴纳-香槟分校",
+    "semester": "2026 春季学期",
+    "announcements": "公告",
+    "upcoming": "近期活动",
+    "schedule_deadlines": "日程与截止日期",
+    "office_hours": "办公时间",
+    "announcement_1_title": "1月20日，星期二",
+    "announcement_1_text": "欢迎来到新学期，2026 春季！",
+    "announcement_2_title": "2月13日，星期五",
+    "announcement_2_line1": "第一次特别活动举办，情人节扭扭棒手工，",
+    "announcement_2_line2": "地点：Grainger 工程图书馆 401 室",
+    "announcement_2_line3": "时间：下午 5:00–7:00"
+  },
+  "activities": {
+    "title": "我们的活动",
+    "pixel_beads": {
+      "title": "拼豆工作坊",
+      "description_1": "使用多彩的融合豆创作明亮、像素风格的设计。你将在图案板上放置珠子，然后加热固定成成品，可以自己保留、送礼或做成钥匙扣或挂饰。这很有趣、放松，也非常适合初学者。",
+      "description_2": "如果你以前从未做过，也不用担心：我们的团队会耐心地一对一指导你。你可以现场选择图案，或者提前给我们发信息，我们会帮你找到可以在两小时内完成的设计。",
+      "description_3": ""
+    },
+    "stone_clay": {
+      "title": "石塑黏土工作坊",
+      "description_1": "石塑黏土是一种柔软的风干材料，易于塑形，硬化后呈现光滑的石质质感。在这个系列工作坊中，你将设计并雕刻自己的公仔或装饰品，然后根据你的风格进行上色和装饰。",
+      "description_2": "我们提供所有材料并指导你完成每一步，所以无需任何经验。由于石塑黏土需要时间完全干燥，每个项目跨越两节课：",
+      "description_3": "第一节课专注于雕塑塑形。",
+      "description_4": "第二节课是在干燥后进行上色和修饰。"
+    },
+    "sealing_wax": {
+      "title": "火漆印章工作坊",
+      "description": "为信件、日记和礼物包装增添经典优雅的火漆封蜡触感。你将学习如何安全地融化蜡、干净地倒出，并压印出清晰、令人满意的结果。我们将提供蜡色、印章和工具，让你可以尝试不同的风格，创作出既个性化又精致的作品。无论你是喜欢美学还是仅仅想尝试新工艺，这个工作坊都是让你的项目瞬间提升档次的简单而有益的方式。"
+    },
+    "pipe_cleaners": {
+      "title": "扭扭棒手工",
+      "description": "扭扭棒简单、多彩且出奇地多变。在这个工作坊中，你将学习简单的扭曲和塑形技巧，制作可爱的花朵、小装饰、挂饰和迷你作品，当天就能带回家。它适合初学者，上手快，非常适合作为放松的社交活动。你可以跟随指导示例或自由发挥设计，我们的团队将在那里帮助你完善形状并将你的想法变为现实。"
+    }
+  },
+  "staff": {
+    "title": "我们的领导团队",
+    "click_to_see_bio": "点击查看简介",
+    "bio_placeholder": "嗨！我是 MYOW DIY 俱乐部的成员。我喜欢手工制作和创造新事物。欢迎询问我最喜欢的项目！",
+    "estella": { "name": "Estella Wang", "title": "主席" },
+    "henry": { "name": "Henry Sa", "title": "副主席" },
+    "joe": { "name": "Joe Yang", "title": "会员总监" },
+    "yuki": { "name": "Yuki Yong", "title": "财务主管" },
+    "anqi": { "name": "Anqi Lu", "title": "艺术总监" },
+    "jacky": { "name": "Jacky Jiang", "title": "秘书" },
+    "sihan": { "name": "Sihan Huang", "title": "外联总监" },
+    "mu": { "name": "Mu Li", "title": "活动协调员" },
+    "yaxin": { "name": "Yaxin Zheng", "title": "活动协调员" }
+  },
+  "about": {
+    "title": "关于我们",
+    "mission_title": "我们的使命",
+    "mission_text": "Make Your Own World DIY 俱乐部是 UIUC 第一个纯粹致力于手工艺的学生组织。我们创建这个俱乐部是为了给学生提供一个温暖、低压的空间，让他们从学业中真正休息一下，结识新朋友，并体验亲手制作东西带来的平静和治愈的快乐。",
+    "membership_title": "会员资格",
+    "membership_text": "无需任何经验。我们提供材料、清晰的步骤指导，以及一个尊重每一位学生和每一种文化的支持性社区。做你自己，按自己的节奏创作，带着独属于你的作品离开。",
+    "paragraph_2": "在整个学期中，我们举办适合初学者的 DIY 工作坊，探索各种材料、技术和文化灵感。在过去的活动中，我们通过拼豆、石塑黏土雕塑、乐高搭建以及手提袋和扇子等创意设计课程将学生聚集在一起。本学期，我们将保留最受喜爱的经典项目，同时增加扭扭棒和火漆等新鲜手工艺，总有新东西等你尝试。",
+    "paragraph_3": "从传统工艺到现代 DIY 潮流，我们在整个学期中探索各种各样的媒介。加入我们，学习新技能，结识长久的友谊，并将体现你个人风格的独特作品带回家。",
+    "bottom_quote": "慢下来，用双手创造，带回一片属于你自己的小世界。"
+  },
+  "membership": {
+    "title": "会员制度",
+    "subtitle": "加入我们的社区，解锁专属福利",
+    "join_now": "立即加入",
+    "event_types_title": "活动类型",
+    "member": {
+      "name": "普通会员",
+      "price": "免费",
+      "feature_1": "可以参加特定的开放活动",
+      "feature_2": "特定工作坊需付费 $5"
+    },
+    "vip": {
+      "name": "VIP",
+      "price": "$30 / 年",
+      "feature_1": "免费参加所有活动",
+      "feature_2": "有资格参加专属 VIP 和 SVIP 工作坊"
+    },
+    "svip": {
+      "name": "SVIP",
+      "price": "$45 / 年",
+      "feature_1": "免费参加所有活动",
+      "feature_2": "有资格参加专属 VIP 和 SVIP 工作坊",
+      "feature_3": "允许提前注册",
+      "feature_4": "确保抢到热门活动名额"
+    }
+  },
+  "store": {
+    "title": "商店",
+    "coming_soon": "敬请期待"
+  }
+}

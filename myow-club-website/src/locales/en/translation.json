@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "home": "Home",
+    "calendar": "Calendar",
+    "activities": "Activities",
+    "staff": "Staff",
+    "about": "About",
+    "store": "Store",
+    "admin": "Admin"
+  },
+  "home": {
+    "title": "MYOW DIY Club",
+    "subtitle": "University of Illinois Urbana-Champaign",
+    "term": "Spring 2026",
+    "announcements": "Announcements",
+    "upcoming": "Upcoming",
+    "schedule": "Schedule & Deadlines",
+    "officeHours": "Office Hours",
+    "noClass": "Recommended Exam Time (NO CLASS)",
+    "announcement1": {
+        "date": "Monday, February 9th",
+        "content": "Welcome to the new semester! Our first general meeting will be held on Feb 20th. We will be discussing the semester's projects, including the new community garden initiative and the custom keyboard workshop."
+    },
+    "announcement2": {
+        "date": "Thursday, January 29th",
+        "content": "Club registration is now open on the RSO portal. Please make sure to sign up before the deadline to get access to the makerspace."
+    }
+  },
+  "calendar": {
+    "title": "Calendar"
+  },
+  "activities": {
+    "title": "Our Workshops",
+    "pixelBeads": {
+      "title": "Pixel Beads Workshop",
+      "desc1": "This workshop is about crafting pixel patterns using pixel beads. The beads can melt when heated, shaping beautiful pictures. The attendees do not need any experience with this; we have patient team members to teach them.",
+      "desc2": "Unleash your creativity in our DIY Pixel Beads Workshop! Design and craft your own pixel-inspired artwork using colorful pixel beads. Whether you’re a beginner or a craft enthusiast, this is a great opportunity to explore your artistic side!",
+      "desc3": "You don't need to worry about not knowing how to play with pixel beads. We have patient staff to guide you one-on-one. You can look for the pattern you want to make by yourself, or you can email us and let us find it for you (make sure that you can finish the pattern in less than two hours)."
+    },
+    "stoneClay": {
+      "title": "Stone Clay Workshop",
+      "desc1": "The Stone Clay Sculpture Workshop is the main theme of the Make Your Own World DIY Club for the fall of 2025 and the spring of 2026. In this series of workshops, you can use the stone clay to make anything you want; just unleash your creativity. The workshops in two weeks cover the entire process: the first week is for shaping, and the second week is for painting.",
+      "desc2": "Stone Clay is a soft, air-dry modeling material that is mainly made of stone powder and is easy to shape, paint, and decorate. It feels like clay when you work with it, but hardens like stone once dry. It’s perfect for making cute figures and ornaments. No prior experience is needed!",
+      "desc3": "During the workshop, you’ll create your own unique sculpture from start to finish. We’ll provide all the materials and tools you need and guide you through every step. It’s a fun way to calm your mind, meet new friends, and take home something you made with your own hands.",
+      "desc4": "Because stone clay requires several days to dry, each complete project spans two sessions:",
+      "session1": "The first session focuses on shaping your sculpture.",
+      "session2": "The second session is for painting and finishing your piece once it’s dry."
+    },
+    "sealingWax": {
+      "title": "Sealing Wax Workshop",
+      "desc": "Join us to learn the art of wax sealing! Create elegant, personalized seals for letters, gifts, and more using traditional techniques and modern designs."
+    },
+    "pipeCleaners": {
+      "title": "Pipe Cleaners Crafting",
+      "desc": "Twist and shape colorful pipe cleaners into adorable animals, flowers, and decorations. A fun and relaxing workshop suitable for everyone!"
+    }
+  },
+  "staff": {
+    "title": "Our Team",
+    "clickToSeeBio": "Click to see bio",
+    "roles": {
+        "President": "President",
+        "Vice President": "Vice President",
+        "Membership Director": "Membership Director",
+        "Treasurer": "Treasurer",
+        "Art Director": "Art Director",
+        "Secretary": "Secretary",
+        "Outreach Director": "Outreach Director",
+        "Event Coordinator": "Event Coordinator"
+    }
+  },
+  "about": {
+    "title": "About MYOW",
+    "missionTitle": "Our Mission",
+    "mission": "The Make Your Own World DIY Club (MYOW) serves to create a place where students can DIY small handicrafts to decorate their lives. This group will not only teach students how to make colorful keychains and beautiful bouquets but also teach about cultures from different parts of the world by making out things in their culture. Finally, we will introduce the effect of materials and techniques on the DIY works.",
+    "membershipTitle": "Membership",
+    "membership": "In order to be a member of the Make Your Own World DIY Club at UIUC, you need to love making things with your hands. Besides, you must respect every student and every culture.",
+    "benefitsTitle": "Benefits",
+    "benefits": [
+        "Voting Rights",
+        "Free admission to RSO events",
+        "Sneak try of newly arrived DIY material before holding public workshops"
+    ]
+  },
+  "store": {
+    "comingSoon": "Coming Soon"
+  }
+}
