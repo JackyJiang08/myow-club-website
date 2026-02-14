@@ -1,15 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const ActivityCard = ({ id, title, description, imageSrc }: { id: string, title: string, description: React.ReactNode, imageSrc: string }) => (
+const ActivityCard = ({ id, title, description }: { id: string, title: string, description: React.ReactNode }) => (
   <div id={id} className="scroll-mt-24 bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full group">
-    <div className="h-64 w-full relative overflow-hidden bg-gray-100">
-      <img 
-        src={imageSrc} 
-        alt={title} 
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-      />
-      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+    <div className="h-64 w-full relative overflow-hidden bg-white flex items-center justify-center border-b border-gray-100">
+      <span className="text-gray-300 text-4xl font-bold tracking-widest select-none">IMAGE</span>
     </div>
     <div className="p-8 flex-grow flex flex-col">
       <h3 className="text-2xl font-bold mb-4 text-gray-800">{title}</h3>
@@ -60,7 +55,6 @@ const Activities = () => {
           <ActivityCard 
             id="pixel-beads"
             title={t('activities.pixel_beads.title')}
-            imageSrc="/images/activities/activity-1.png"
             description={
               <>
                 <p>{t('activities.pixel_beads.description_1')}</p>
@@ -73,7 +67,6 @@ const Activities = () => {
           <ActivityCard 
             id="stone-clay"
             title={t('activities.stone_clay.title')}
-            imageSrc="/images/activities/activity-2.png"
             description={
               <>
                 <p>{t('activities.stone_clay.description_1')}</p>
@@ -92,7 +85,6 @@ const Activities = () => {
           <ActivityCard 
             id="sealing-wax"
             title={t('activities.sealing_wax.title')}
-            imageSrc="/images/activities/activity-3.png"
             description={<p>{t('activities.sealing_wax.description')}</p>}
           />
 
@@ -100,7 +92,6 @@ const Activities = () => {
           <ActivityCard 
             id="pipe-cleaners"
             title={t('activities.pipe_cleaners.title')}
-            imageSrc="/images/activities/activity-4.png"
             description={<p>{t('activities.pipe_cleaners.description')}</p>}
           />
         </div>
