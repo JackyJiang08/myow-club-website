@@ -1,15 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-// Placeholder images - using colored gradients/patterns for now as per instructions "make it special beautiful"
-const ActivityCard = ({ id, title, description, imageGradient }: { id: string, title: string, description: React.ReactNode, imageGradient: string }) => (
+const ActivityCard = ({ id, title, description, imageSrc }: { id: string, title: string, description: React.ReactNode, imageSrc: string }) => (
   <div id={id} className="scroll-mt-24 bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full group">
-    <div className={`h-64 w-full ${imageGradient} relative overflow-hidden`}>
+    <div className="h-64 w-full relative overflow-hidden bg-gray-100">
+      <img 
+        src={imageSrc} 
+        alt={title} 
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
       <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
-      {/* Decorative overlay or placeholder for actual image */}
-      <div className="absolute inset-0 flex items-center justify-center text-white/90 font-bold text-3xl opacity-30 select-none transform group-hover:scale-110 transition-transform duration-700">
-        MYOW
-      </div>
     </div>
     <div className="p-8 flex-grow flex flex-col">
       <h3 className="text-2xl font-bold mb-4 text-gray-800">{title}</h3>
@@ -60,7 +60,7 @@ const Activities = () => {
           <ActivityCard 
             id="pixel-beads"
             title={t('activities.pixel_beads.title')}
-            imageGradient="bg-gradient-to-r from-pink-400 to-purple-500"
+            imageSrc="/images/activities/activity-1.png"
             description={
               <>
                 <p>{t('activities.pixel_beads.description_1')}</p>
@@ -73,7 +73,7 @@ const Activities = () => {
           <ActivityCard 
             id="stone-clay"
             title={t('activities.stone_clay.title')}
-            imageGradient="bg-gradient-to-r from-stone-400 to-stone-600"
+            imageSrc="/images/activities/activity-2.png"
             description={
               <>
                 <p>{t('activities.stone_clay.description_1')}</p>
@@ -92,7 +92,7 @@ const Activities = () => {
           <ActivityCard 
             id="sealing-wax"
             title={t('activities.sealing_wax.title')}
-            imageGradient="bg-gradient-to-br from-red-500 to-orange-600"
+            imageSrc="/images/activities/activity-3.png"
             description={<p>{t('activities.sealing_wax.description')}</p>}
           />
 
@@ -100,7 +100,7 @@ const Activities = () => {
           <ActivityCard 
             id="pipe-cleaners"
             title={t('activities.pipe_cleaners.title')}
-            imageGradient="bg-gradient-to-bl from-green-400 to-teal-500"
+            imageSrc="/images/activities/activity-4.png"
             description={<p>{t('activities.pipe_cleaners.description')}</p>}
           />
         </div>
