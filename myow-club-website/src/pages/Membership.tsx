@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Check, Star, Crown, Ticket, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'framer-motion';
 
 const Modal = ({ isOpen, onClose, title, content }: { isOpen: boolean, onClose: () => void, title: string, content: React.ReactNode }) => {
   if (!isOpen) return null;
@@ -42,6 +42,42 @@ const Modal = ({ isOpen, onClose, title, content }: { isOpen: boolean, onClose: 
   );
 };
 
+const CountUp = ({ value, prefix = '', suffix = '' }: { value: number, prefix?: string, suffix?: string }) => {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, Math.round);
+
+  useEffect(() => {
+    const animation = animate(count, value, { duration: 0.8, ease: "circOut" });
+    return animation.stop;
+  }, [value]);
+
+  return (
+    <span className="inline-flex items-baseline">
+      {prefix}
+      <motion.span>{rounded}</motion.span>
+      {suffix}
+    </span>
+  );
+};
+
+const extractPrice = (priceString: string) => {
+  const match = priceString.match(/(\D*)(\d+)(\D*)/);
+  if (match) {
+    return {
+      prefix: match[1],
+      number: parseInt(match[2], 10),
+      suffix: match[3],
+      isNumber: true
+    };
+  }
+  return {
+    prefix: priceString,
+    number: 0,
+    suffix: '',
+    isNumber: false
+  };
+};
+
 const Membership = () => {
   const { t } = useTranslation();
   const [modalOpen, setModalOpen] = useState(false);
@@ -61,7 +97,7 @@ const Membership = () => {
         t('membership.member.feature_1'),
         t('membership.member.feature_2'),
       ],
-      color: 'bg-indigo-50 border-indigo-200',
+      color: 'bg-indigo-50/50 border-indigo-200/50',
       buttonColor: 'bg-indigo-600 hover:bg-indigo-700',
       type: 'member' as const
     },
@@ -74,7 +110,7 @@ const Membership = () => {
         t('membership.vip.feature_1'),
         t('membership.vip.feature_2'),
       ],
-      color: 'bg-amber-50 border-amber-200',
+      color: 'bg-amber-50/50 border-amber-200/50',
       buttonColor: 'bg-amber-600 hover:bg-amber-700',
       type: 'paid' as const
     },
@@ -88,7 +124,7 @@ const Membership = () => {
         t('membership.svip.feature_3'),
         t('membership.svip.feature_4'),
       ],
-      color: 'bg-rose-50 border-rose-200',
+      color: 'bg-rose-50/50 border-rose-200/50',
       buttonColor: 'bg-rose-600 hover:bg-rose-700',
       type: 'paid' as const
     },
@@ -119,17 +155,32 @@ const Membership = () => {
               </div>
             )}
             
-            <div className="mb-6 flex items-center gap-4">
-              <div className="p-3 bg-white rounded-2xl shadow-sm">
-                {tier.icon}
+            <div className="mb-8 text-center">
+              <div className="flex justify-center mb-4">
+                <div className="p-3 bg-white rounded-2xl shadow-sm">
+                  {tier.icon}
+                </div>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900">{tier.name}</h3>
-                <p className="text-gray-500 font-medium">{tier.price}</p>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">{tier.name}</h3>
+              <div className="text-4xl font-bold text-gray-900 mb-1 h-12 flex items-center justify-center">
+                {(() => {
+                  const { isNumber, prefix, number, suffix } = extractPrice(tier.price);
+                  if (isNumber) {
+                    return <CountUp value={number} prefix={prefix} suffix={suffix} />;
+                  }
+                  return <span>{tier.price}</span>;
+                })()}
               </div>
             </div>
 
-            <ul className="space-y-4 mb-8 flex-grow">
+            <button 
+              onClick={() => handleJoinClick(tier.type)}
+              className={`w-full py-3 rounded-xl text-white font-bold shadow-md transition-transform active:scale-95 ${tier.buttonColor} mb-8`}
+            >
+              {t('membership.join_now')}
+            </button>
+
+            <ul className="space-y-4 flex-grow">
               {tier.features.map((feature, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
@@ -137,13 +188,6 @@ const Membership = () => {
                 </li>
               ))}
             </ul>
-
-            <button 
-              onClick={() => handleJoinClick(tier.type)}
-              className={`w-full py-3 rounded-xl text-white font-bold shadow-md transition-transform active:scale-95 ${tier.buttonColor}`}
-            >
-              {t('membership.join_now')}
-            </button>
           </motion.div>
         ))}
       </div>
@@ -189,13 +233,13 @@ const Membership = () => {
                 <div className="space-y-3">
                   <div className="bg-white p-3 rounded-lg border border-green-200">
                     <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Zelle</p>
-                    <p className="font-mono text-gray-800 select-all">estellawang24@gmail.com</p>
-                    <p className="text-sm text-gray-600 mt-1">Name: <span className="font-semibold">JIAXUAN WANG</span></p>
+                    <p className="font-mono text-gray-800 select-all">(217)898-8615</p>
+                    <p className="text-sm text-gray-600 mt-1">Name: <span className="font-semibold">YUQING JIANG</span></p>
                   </div>
                   
                   <div className="bg-white p-3 rounded-lg border border-green-200">
                     <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">WeChat</p>
-                    <p className="font-mono text-gray-800 select-all">wjxnj12</p>
+                    <p className="font-mono text-gray-800 select-all">JYQ050812</p>
                   </div>
                 </div>
               </div>
