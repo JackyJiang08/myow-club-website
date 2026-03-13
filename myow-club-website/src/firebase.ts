@@ -1,3 +1,4 @@
+// Mock Firebase implementation for local development without configuration
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, type Auth } from "firebase/auth";
 import { getFirestore, type Firestore } from "firebase/firestore";
@@ -14,14 +15,17 @@ const firebaseConfig = {
 };
 
 // Check if config is configured
-const isConfigured = firebaseConfig.apiKey !== "YOUR_API_KEY";
+const isRealConfigured = firebaseConfig.apiKey !== "YOUR_API_KEY";
+
+// We'll treat it as configured for the mock version so the UI works
+const isConfigured = true;
 
 let app;
 let auth: Auth;
 let googleProvider: GoogleAuthProvider;
 let db: Firestore;
 
-if (isConfigured) {
+if (isRealConfigured) {
   try {
     app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
     auth = getAuth(app);
@@ -31,11 +35,23 @@ if (isConfigured) {
     console.error("Firebase initialization error:", error);
   }
 } else {
-  console.warn("Firebase is not configured. Using mock objects. Please update src/firebase.ts with your actual config.");
-  // Mock objects to prevent crash, but they won't work for real auth
-  auth = {} as Auth;
+  console.warn("Firebase is not configured. Using mock objects backed by localStorage.");
+  
+  // Mock objects to prevent crash and allow local testing
+  auth = {
+    currentUser: null,
+    signOut: async () => console.log('Mock signOut')
+  } as unknown as Auth;
+  
   googleProvider = new GoogleAuthProvider();
-  db = {} as Firestore;
+  
+  // Create a Proxy to mock Firestore methods
+  db = new Proxy({} as Firestore, {
+    get: (target, prop) => {
+      // Return a dummy object/function for any property accessed on db
+      return () => {};
+    }
+  });
 }
 
-export { auth, googleProvider, db, isConfigured };
+export { auth, googleProvider, db, isConfigured, isRealConfigured };

@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import { useUpcomingEvents } from '../utils/calendar';
+import { useUpcomingEvents, useAnnouncements } from '../utils/calendar';
 
 const Home = () => {
   const { t } = useTranslation();
-  const { events: upcomingActivities, loading } = useUpcomingEvents(4);
+  const { events: upcomingActivities, loading: loadingEvents } = useUpcomingEvents(4);
+  const { announcements, loading: loadingAnnouncements } = useAnnouncements(2);
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -27,27 +28,46 @@ const Home = () => {
             {t('home.announcements')}
           </h2>
           
-          <div className="bg-[#FFF9E5] rounded-[2rem] p-8 shadow-sm h-full border border-yellow-100/50">
-            {/* Latest Announcement First */}
-            <div className="mb-10 last:mb-0 relative pl-6 border-l-2 border-yellow-300/30">
-              <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-yellow-400 border-4 border-[#FFF9E5]"></div>
-              <h3 className="font-bold text-gray-900 text-lg mb-2">{t('home.announcement_2_title')}</h3>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                {t('home.announcement_2_line1')}
-                <br />
-                {t('home.announcement_2_line2')}
-                <br />
-                {t('home.announcement_2_line3')}
-              </p>
-            </div>
+          <div className="bg-[#FFF9E5] rounded-[2rem] p-8 shadow-sm h-full border border-yellow-100/50 min-h-[300px]">
+            {loadingAnnouncements ? (
+              <div className="text-center text-gray-500 py-12">Loading announcements...</div>
+            ) : announcements.length > 0 ? (
+              announcements.map((announcement, index) => (
+                <div key={announcement.id} className="mb-10 last:mb-0 relative pl-6 border-l-2 border-yellow-300/30">
+                  <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full border-4 border-[#FFF9E5] ${index === 0 ? 'bg-yellow-400' : 'bg-yellow-200'}`}></div>
+                  <h3 className="font-bold text-gray-900 text-lg mb-2">{announcement.title}</h3>
+                  <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
+                    {announcement.content}
+                  </p>
+                  <p className="text-sm text-gray-400 mt-2">
+                    {announcement.date?.seconds ? new Date(announcement.date.seconds * 1000).toLocaleDateString() : ''}
+                  </p>
+                </div>
+              ))
+            ) : (
+              // Fallback content if no announcements in DB yet (so site doesn't look empty initially)
+              <>
+                 <div className="mb-10 last:mb-0 relative pl-6 border-l-2 border-yellow-300/30">
+                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-yellow-400 border-4 border-[#FFF9E5]"></div>
+                  <h3 className="font-bold text-gray-900 text-lg mb-2">{t('home.announcement_2_title')}</h3>
+                  <p className="text-gray-700 leading-relaxed text-lg">
+                    {t('home.announcement_2_line1')}
+                    <br />
+                    {t('home.announcement_2_line2')}
+                    <br />
+                    {t('home.announcement_2_line3')}
+                  </p>
+                </div>
 
-            <div className="mb-10 last:mb-0 relative pl-6 border-l-2 border-yellow-300/30">
-              <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-yellow-200 border-4 border-[#FFF9E5]"></div>
-              <h3 className="font-bold text-gray-900 text-lg mb-2">{t('home.announcement_1_title')}</h3>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                {t('home.announcement_1_text')}
-              </p>
-            </div>
+                <div className="mb-10 last:mb-0 relative pl-6 border-l-2 border-yellow-300/30">
+                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-yellow-200 border-4 border-[#FFF9E5]"></div>
+                  <h3 className="font-bold text-gray-900 text-lg mb-2">{t('home.announcement_1_title')}</h3>
+                  <p className="text-gray-700 leading-relaxed text-lg">
+                    {t('home.announcement_1_text')}
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -60,21 +80,25 @@ const Home = () => {
           
           <div className="bg-[#F3F4F6] rounded-[2rem] p-8 shadow-sm h-full border border-gray-100">
              <div className="space-y-6">
-               {loading && <div className="text-gray-500 text-center py-4">Loading events...</div>}
+               {loadingEvents && <div className="text-gray-500 text-center py-4">Loading events...</div>}
                
-               {!loading && upcomingActivities.map((activity) => (
-                 <div key={activity.id} className="flex gap-4 group">
-                   <div className="flex flex-col items-end min-w-[3.5rem]">
-                     <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{new Date(activity.date).toLocaleString('en-US', { month: 'short' })}</span>
-                     <span className="text-2xl font-bold text-gray-800 leading-none">{new Date(activity.date).getDate()}</span>
+               {!loadingEvents && upcomingActivities.map((activity) => {
+                 const date = new Date(activity.start);
+                 return (
+                   <div key={activity.id} className="flex gap-4 group">
+                     <div className="flex flex-col items-end min-w-[3.5rem]">
+                       <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{date.toLocaleString('default', { month: 'short' })}</span>
+                       <span className="text-2xl font-bold text-gray-800 leading-none">{date.getDate()}</span>
+                     </div>
+                     <div className="pt-1">
+                       <div className="font-medium text-gray-900 group-hover:text-indigo-600 transition-colors duration-200 text-lg leading-tight">{activity.title}</div>
+                       <div className="text-sm text-gray-500 mt-1">{activity.location}</div>
+                     </div>
                    </div>
-                   <div className="pt-1">
-                     <div className="font-medium text-gray-900 group-hover:text-indigo-600 transition-colors duration-200 text-lg leading-tight">{activity.title}</div>
-                   </div>
-                 </div>
-               ))}
+                 );
+               })}
 
-               {!loading && upcomingActivities.length === 0 && (
+               {!loadingEvents && upcomingActivities.length === 0 && (
                  <div className="text-gray-500 text-center">No upcoming events found.</div>
                )}
              </div>

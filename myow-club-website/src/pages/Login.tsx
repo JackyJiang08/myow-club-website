@@ -1,57 +1,79 @@
-import { signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider, isConfigured } from '../firebase';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PenTool } from 'lucide-react';
+import { isRealConfigured } from '../firebase';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
 
-  const handleGoogleLogin = async () => {
-    if (!isConfigured) {
-      alert("Firebase is not configured yet! Check console for details.");
-      return;
-    }
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+
+    const trimmedEmail = email.trim().toLowerCase();
     
-    try {
-      await signInWithPopup(auth, googleProvider);
+    const allowedEmails = ['jiangyuqing0508@gmail.com', 'jw151@illinois.edu'];
+    
+    // In a real app, this validation should happen on the server/backend
+    if (allowedEmails.includes(trimmedEmail)) {
+      // Simulate auth session in localStorage
+      localStorage.setItem('adminUserEmail', trimmedEmail);
+      localStorage.setItem('adminAuthToken', 'mock-token-' + Date.now());
       navigate('/admin');
-    } catch (error) {
-      console.error("Error signing in with Google", error);
-      alert("Failed to sign in. Please check the console for details.");
+    } else {
+      setError('Access Denied: This email is not authorized for leadership access.');
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
       <div className="bg-white p-8 rounded-xl shadow-lg max-w-md w-full text-center border border-gray-100">
-        <div className="bg-indigo-600 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-          <PenTool className="w-8 h-8 text-white" />
+        <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-6 border border-gray-200">
+           <img 
+             src="/logo.png" 
+             alt="MYOW Logo" 
+             className="w-full h-full object-cover transform scale-150 translate-y-2"
+           />
         </div>
         
         <h1 className="text-2xl font-bold text-gray-800 mb-2">Staff Login</h1>
-        <p className="text-gray-600 mb-8">Sign in to manage club activities and announcements.</p>
+        <p className="text-gray-600 mb-8 whitespace-nowrap">Enter your email to access the admin dashboard.</p>
         
-        {!isConfigured && (
-          <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-3 rounded mb-6 text-sm">
-            <strong>Setup Required:</strong> Please configure Firebase in <code>src/firebase.ts</code> to enable login.
+        {!isRealConfigured && (
+          <div className="bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded mb-6 text-sm">
+            <strong>Demo Mode:</strong> Firebase is not configured, but you can still log in to test the UI. Data will be saved to your browser's local storage.
           </div>
         )}
 
-        <button
-          onClick={handleGoogleLogin}
-          disabled={!isConfigured}
-          className={`w-full flex items-center justify-center gap-3 border border-gray-300 font-semibold py-3 px-4 rounded-lg transition-colors shadow-sm
-            ${!isConfigured 
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-              : 'bg-white text-gray-700 hover:bg-gray-50'
-            }`}
-        >
-          <img src="https://www.google.com/favicon.ico" alt="Google" className={`w-5 h-5 ${!isConfigured ? 'opacity-50' : ''}`} />
-          Sign in with Google
-        </button>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email address"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
+              required
+            />
+          </div>
+
+          {error && (
+            <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-100">
+              {error}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className="w-full font-bold py-3 px-4 rounded-lg transition-colors shadow-md bg-indigo-600 text-white hover:bg-indigo-700"
+          >
+            Enter Dashboard
+          </button>
+        </form>
         
         <p className="mt-6 text-xs text-gray-500">
-          Only authorized staff members can access the admin dashboard.
+          Restricted access for MYOW Leadership Team only.
         </p>
       </div>
     </div>
