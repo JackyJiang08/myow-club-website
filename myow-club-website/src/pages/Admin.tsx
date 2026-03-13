@@ -6,8 +6,6 @@ import {
   LogOut, 
   Plus, 
   Trash2, 
-  BarChart3,
-  Users,
   MousePointerClick,
   MapPin,
   TrendingUp,

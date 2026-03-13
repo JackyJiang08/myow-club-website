@@ -47,7 +47,7 @@ if (isRealConfigured) {
   
   // Create a Proxy to mock Firestore methods
   db = new Proxy({} as Firestore, {
-    get: (target, prop) => {
+    get: (_target, _prop) => {
       // Return a dummy object/function for any property accessed on db
       return () => {};
     }
