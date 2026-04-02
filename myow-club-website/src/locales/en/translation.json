@@ -57,7 +57,7 @@
   },
   "staff": {
     "title": "Our Team",
-    "clickToSeeBio": "Click to see bio",
+    "clickToSeeBio": "Hover to see bio",
     "roles": {
         "President": "President",
         "Vice President": "Vice President",

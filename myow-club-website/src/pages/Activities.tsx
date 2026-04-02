@@ -1,14 +1,27 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const ActivityCard = ({ id, title, description }: { id: string, title: string, description: React.ReactNode }) => (
-  <div id={id} className="scroll-mt-24 bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full group">
-    <div className="h-64 w-full relative overflow-hidden bg-white flex items-center justify-center border-b border-gray-100">
-      <span className="text-gray-300 text-4xl font-bold tracking-widest select-none">IMAGE</span>
+const ActivityCard = ({ id, title, description, imgSrc }: { id: string, title: string, description: React.ReactNode, imgSrc?: string }) => (
+  <div id={id} className="scroll-mt-24 bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col md:flex-row group">
+    {/* Image Container (Left on Desktop, Top on Mobile) */}
+    <div className="w-full md:w-2/5 lg:w-[45%] relative bg-gray-50 flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 shrink-0 p-6 lg:p-8">
+      {imgSrc ? (
+        <img 
+          src={imgSrc} 
+          alt={title} 
+          className="w-full h-auto object-contain rounded-2xl shadow-sm border border-gray-200/50 max-h-[500px] md:max-h-[700px] transition-transform duration-500 group-hover:scale-[1.02]" 
+        />
+      ) : (
+        <div className="h-64 md:h-full flex items-center justify-center min-h-[300px]">
+          <span className="text-gray-300 text-4xl font-bold tracking-widest select-none">IMAGE</span>
+        </div>
+      )}
     </div>
-    <div className="p-8 flex-grow flex flex-col">
-      <h3 className="text-2xl font-bold mb-4 text-gray-800">{title}</h3>
-      <div className="text-gray-600 leading-relaxed flex-grow space-y-4 text-lg">
+    
+    {/* Text Container (Right on Desktop, Bottom on Mobile) */}
+    <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center w-full md:w-3/5 lg:w-[55%]">
+      <h3 className="text-3xl font-bold mb-6 text-gray-900">{title}</h3>
+      <div className="text-gray-600 leading-relaxed space-y-5 text-lg">
         {description}
       </div>
     </div>
@@ -55,6 +68,7 @@ const Activities = () => {
           <ActivityCard 
             id="pixel-beads"
             title={t('activities.pixel_beads.title')}
+            imgSrc="/pixel_beads.png"
             description={
               <>
                 <p>{t('activities.pixel_beads.description_1')}</p>
@@ -67,6 +81,7 @@ const Activities = () => {
           <ActivityCard 
             id="stone-clay"
             title={t('activities.stone_clay.title')}
+            imgSrc="/stone_clay.png"
             description={
               <>
                 <p>{t('activities.stone_clay.description_1')}</p>
@@ -85,6 +100,7 @@ const Activities = () => {
           <ActivityCard 
             id="sealing-wax"
             title={t('activities.sealing_wax.title')}
+            imgSrc="/sealing_wax.png"
             description={<p>{t('activities.sealing_wax.description')}</p>}
           />
 
@@ -92,6 +108,7 @@ const Activities = () => {
           <ActivityCard 
             id="pipe-cleaners"
             title={t('activities.pipe_cleaners.title')}
+            imgSrc="/pipe_cleaners.png"
             description={<p>{t('activities.pipe_cleaners.description')}</p>}
           />
         </div>

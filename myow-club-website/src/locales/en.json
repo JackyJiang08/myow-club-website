@@ -50,7 +50,7 @@
   },
   "staff": {
     "title": "Our Leadership",
-    "click_to_see_bio": "Click to see bio",
+    "click_to_see_bio": "Hover to see bio",
     "bio_placeholder": "Hi! I'm a member of the MYOW DIY Club. I love crafting and creating new things. Ask me about my favorite projects!",
     "estella": { "name": "Estella Wang", "title": "President" },
     "henry": { "name": "Henry Sa", "title": "Vice President" },

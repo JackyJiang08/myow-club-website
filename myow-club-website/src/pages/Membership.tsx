@@ -92,40 +92,40 @@ const Membership = () => {
     {
       name: t('membership.member.name'),
       price: t('membership.member.price'),
-      icon: <Ticket className="w-8 h-8 text-indigo-500" />,
+      icon: <Ticket className="w-8 h-8 text-gray-900" />,
       features: [
         t('membership.member.feature_1'),
         t('membership.member.feature_2'),
       ],
-      color: 'bg-indigo-50/50 border-indigo-200/50',
-      buttonColor: 'bg-indigo-600 hover:bg-indigo-700',
+      color: 'bg-gray-50/50 border-gray-200/50',
+      buttonColor: 'bg-blue-600 hover:bg-blue-700',
       type: 'member' as const
     },
     {
       name: t('membership.vip.name'),
       price: t('membership.vip.price'),
-      icon: <Star className="w-8 h-8 text-amber-500" />,
+      icon: <Star className="w-8 h-8 text-gray-900" />,
       popular: true,
       features: [
         t('membership.vip.feature_1'),
         t('membership.vip.feature_2'),
       ],
-      color: 'bg-amber-50/50 border-amber-200/50',
-      buttonColor: 'bg-amber-600 hover:bg-amber-700',
+      color: 'bg-gray-50/50 border-gray-200/50',
+      buttonColor: 'bg-blue-600 hover:bg-blue-700',
       type: 'paid' as const
     },
     {
       name: t('membership.svip.name'),
       price: t('membership.svip.price'),
-      icon: <Crown className="w-8 h-8 text-rose-500" />,
+      icon: <Crown className="w-8 h-8 text-gray-900" />,
       features: [
         t('membership.svip.feature_1'),
         t('membership.svip.feature_2'),
         t('membership.svip.feature_3'),
         t('membership.svip.feature_4'),
       ],
-      color: 'bg-rose-50/50 border-rose-200/50',
-      buttonColor: 'bg-rose-600 hover:bg-rose-700',
+      color: 'bg-gray-50/50 border-gray-200/50',
+      buttonColor: 'bg-blue-600 hover:bg-blue-700',
       type: 'paid' as const
     },
   ];
@@ -149,7 +149,7 @@ const Membership = () => {
           >
             {tier.popular && (
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <span className="bg-amber-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-md uppercase tracking-wider">
+                <span className="bg-gray-900 text-white px-4 py-1 rounded-full text-sm font-bold shadow-md uppercase tracking-wider">
                   Most Popular
                 </span>
               </div>
@@ -161,8 +161,8 @@ const Membership = () => {
                   {tier.icon}
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">{tier.name}</h3>
-              <div className="text-4xl font-bold text-gray-900 mb-1 h-12 flex items-center justify-center">
+              <div className="text-4xl font-bold text-gray-900 mb-2 h-12 flex items-center justify-center">{tier.name}</div>
+              <div className="text-2xl font-bold text-gray-900 mb-4">
                 {(() => {
                   const { isNumber, prefix, number, suffix } = extractPrice(tier.price);
                   if (isNumber) {
@@ -175,7 +175,7 @@ const Membership = () => {
 
             <button 
               onClick={() => handleJoinClick(tier.type)}
-              className={`w-full py-3 rounded-xl text-white font-bold shadow-md transition-transform active:scale-95 ${tier.buttonColor} mb-8`}
+              className={`w-full py-3 rounded-xl text-white font-bold shadow-md transition-transform active:scale-95 ${tier.buttonColor} mb-8 border border-transparent`}
             >
               {t('membership.join_now')}
             </button>
@@ -199,30 +199,30 @@ const Membership = () => {
         content={
           modalType === 'member' ? (
             <div className="space-y-4">
-              <p className="font-medium text-lg">
-                Please register through our official university portal:
+              <p className="font-medium text-lg text-center whitespace-nowrap">
+                Please register thru our official university portal:
               </p>
               <a 
                 href="https://one.illinois.edu/MakeYourOwnWorldDIYClub/club_signup" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors w-full text-center shadow-sm"
+                className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors w-full text-center shadow-sm"
               >
-                Go to OneIllinois
+                Go To IllinoisOne
               </a>
             </div>
           ) : (
             <div className="space-y-6">
               <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
                 <p className="font-bold text-blue-900 mb-2">Step 1: Registration</p>
-                <p className="text-sm text-blue-800 mb-3">Register officially through the university portal:</p>
+                <p className="text-sm text-blue-800 mb-3">Please register thru our official university portal:</p>
                 <a 
                   href="https://one.illinois.edu/MakeYourOwnWorldDIYClub/club_signup" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 underline font-medium break-all"
+                  className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors w-full text-center shadow-sm"
                 >
-                  https://one.illinois.edu/MakeYourOwnWorldDIYClub/club_signup
+                  Go To IllinoisOne
                 </a>
               </div>
 

@@ -50,7 +50,7 @@
   },
   "staff": {
     "title": "我们的领导团队",
-    "click_to_see_bio": "点击查看简介",
+    "click_to_see_bio": "悬停查看简介",
     "bio_placeholder": "嗨！我是 MYOW DIY 俱乐部的成员。我喜欢手工制作和创造新事物。欢迎询问我最喜欢的项目！",
     "estella": { "name": "Estella Wang", "title": "主席" },
     "henry": { "name": "Henry Sa", "title": "副主席" },
