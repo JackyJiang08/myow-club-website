@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const ActivityCard = ({ id, title, description, imgSrc }: { id: string, title: string, description: React.ReactNode, imgSrc?: string }) => (
-  <div id={id} className="scroll-mt-24 bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col md:flex-row group">
+  <article id={id} className="scroll-mt-24 snap-start bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col md:flex-row group w-[88vw] max-w-[980px] shrink-0">
     {/* Image Container (Left on Desktop, Top on Mobile) */}
     <div className="w-full md:w-2/5 lg:w-[45%] relative bg-gray-50 flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 shrink-0 p-6 lg:p-8">
       {imgSrc ? (
@@ -25,18 +25,24 @@ const ActivityCard = ({ id, title, description, imgSrc }: { id: string, title: s
         {description}
       </div>
     </div>
-  </div>
+  </article>
 );
 
 const Activities = () => {
   const { t } = useTranslation();
+  const cardRefs = React.useRef<Record<string, HTMLElement | null>>({});
 
   const links = [
     { id: 'pixel-beads', label: t('activities.pixel_beads.title') },
     { id: 'stone-clay', label: t('activities.stone_clay.title') },
     { id: 'sealing-wax', label: t('activities.sealing_wax.title') },
     { id: 'pipe-cleaners', label: t('activities.pipe_cleaners.title') },
+    { id: '3d-printing', label: t('activities.three_d_printing.title') },
   ];
+
+  const scrollToCard = (id: string) => {
+    cardRefs.current[id]?.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+  };
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
@@ -48,69 +54,90 @@ const Activities = () => {
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         {/* Sidebar */}
         <div className="hidden lg:block w-64 sticky top-24 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <h3 className="font-bold text-gray-900 mb-4 px-2 uppercase text-sm tracking-wider">Contents</h3>
+          <h3 className="font-bold text-gray-900 mb-4 px-2 uppercase text-sm tracking-wider">Activity List</h3>
           <nav className="space-y-1">
             {links.map((link) => (
-              <a 
+              <button
                 key={link.id}
-                href={`#${link.id}`}
+                type="button"
+                onClick={() => scrollToCard(link.id)}
                 className="block px-3 py-2 rounded-lg text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 transition-colors font-medium text-sm"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </nav>
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 space-y-12">
+        <div className="flex-1 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth">
+          <div className="flex gap-6 w-max pr-4">
           {/* Pixel Beads */}
-          <ActivityCard 
-            id="pixel-beads"
-            title={t('activities.pixel_beads.title')}
-            imgSrc="/pixel_beads.png"
-            description={
-              <>
-                <p>{t('activities.pixel_beads.description_1')}</p>
-                <p>{t('activities.pixel_beads.description_2')}</p>
-              </>
-            }
-          />
+            <div ref={(node) => { cardRefs.current['pixel-beads'] = node; }}>
+              <ActivityCard 
+                id="pixel-beads"
+                title={t('activities.pixel_beads.title')}
+                imgSrc="/pixel_beads.png"
+                description={
+                  <>
+                    <p>{t('activities.pixel_beads.description_1')}</p>
+                    <p>{t('activities.pixel_beads.description_2')}</p>
+                  </>
+                }
+              />
+            </div>
 
           {/* Stone Clay */}
-          <ActivityCard 
-            id="stone-clay"
-            title={t('activities.stone_clay.title')}
-            imgSrc="/stone_clay.png"
-            description={
-              <>
-                <p>{t('activities.stone_clay.description_1')}</p>
-                <div className="bg-stone-50 p-6 rounded-xl border border-stone-100 my-4">
-                  <p className="mb-4">{t('activities.stone_clay.description_2')}</p>
-                  <ul className="list-disc list-inside space-y-1 ml-4">
-                    <li>{t('activities.stone_clay.description_3')}</li>
-                    <li>{t('activities.stone_clay.description_4')}</li>
-                  </ul>
-                </div>
-              </>
-            }
-          />
+            <div ref={(node) => { cardRefs.current['stone-clay'] = node; }}>
+              <ActivityCard 
+                id="stone-clay"
+                title={t('activities.stone_clay.title')}
+                imgSrc="/stone_clay.png"
+                description={
+                  <>
+                    <p>{t('activities.stone_clay.description_1')}</p>
+                    <div className="bg-stone-50 p-6 rounded-xl border border-stone-100 my-4">
+                      <p className="mb-4">{t('activities.stone_clay.description_2')}</p>
+                      <ul className="list-disc list-inside space-y-1 ml-4">
+                        <li>{t('activities.stone_clay.description_3')}</li>
+                        <li>{t('activities.stone_clay.description_4')}</li>
+                      </ul>
+                    </div>
+                  </>
+                }
+              />
+            </div>
 
           {/* Sealing Wax */}
-          <ActivityCard 
-            id="sealing-wax"
-            title={t('activities.sealing_wax.title')}
-            imgSrc="/sealing_wax.png"
-            description={<p>{t('activities.sealing_wax.description')}</p>}
-          />
+            <div ref={(node) => { cardRefs.current['sealing-wax'] = node; }}>
+              <ActivityCard 
+                id="sealing-wax"
+                title={t('activities.sealing_wax.title')}
+                imgSrc="/sealing_wax.png"
+                description={<p>{t('activities.sealing_wax.description')}</p>}
+              />
+            </div>
 
           {/* Pipe Cleaners */}
-          <ActivityCard 
-            id="pipe-cleaners"
-            title={t('activities.pipe_cleaners.title')}
-            imgSrc="/pipe_cleaners.png"
-            description={<p>{t('activities.pipe_cleaners.description')}</p>}
-          />
+            <div ref={(node) => { cardRefs.current['pipe-cleaners'] = node; }}>
+              <ActivityCard 
+                id="pipe-cleaners"
+                title={t('activities.pipe_cleaners.title')}
+                imgSrc="/pipe_cleaners.png"
+                description={<p>{t('activities.pipe_cleaners.description')}</p>}
+              />
+            </div>
+
+          {/* 3D Printing */}
+            <div ref={(node) => { cardRefs.current['3d-printing'] = node; }}>
+              <ActivityCard 
+                id="3d-printing"
+                title={t('activities.three_d_printing.title')}
+                imgSrc="/3D-printing.png"
+                description={<p>{t('activities.three_d_printing.description')}</p>}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

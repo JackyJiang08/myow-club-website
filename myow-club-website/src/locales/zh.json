@@ -46,6 +46,10 @@
     "pipe_cleaners": {
       "title": "扭扭棒手工",
       "description": "扭扭棒简单、多彩且出奇地多变。在这个工作坊中，你将学习简单的扭曲和塑形技巧，制作可爱的花朵、小装饰、挂饰和迷你作品，当天就能带回家。它适合初学者，上手快，非常适合作为放松的社交活动。你可以跟随指导示例或自由发挥设计，我们的团队将在那里帮助你完善形状并将你的想法变为现实。"
+    },
+    "three_d_printing": {
+      "title": "3D打印",
+      "description": "在这个活动中，你将了解 3D 打印的基础流程，从数字模型如何被切片、打印，到成品如何打磨和展示。我们会带你认识常见材料与设备，分享适合初学者的小项目思路，并展示 3D 打印如何把创意快速变成真实作品。无论你是对建模、原型制作还是有趣的小摆件感兴趣，这都会是一次轻松又有启发的入门体验。"
     }
   },
   "staff": {
@@ -99,7 +103,47 @@
     }
   },
   "store": {
-    "title": "商店",
-    "coming_soon": "敬请期待"
+    "title": "闲置交换",
+    "badge": "校园二手与闲置发布",
+    "intro": "在这里发布想转出的物品，也可以浏览其他同学留下的卡片信息。提交后会先进入管理员审核，通过后才会公开展示。",
+    "publish_title": "发布物品",
+    "publish_description": "先填写信息并提交审核，管理员通过后卡片才会出现在右侧公开列表中。",
+    "feed_title": "已通过审核",
+    "feed_description": "以下卡片均已通过管理员审核，可放心联系发布者。",
+    "count_suffix": "条",
+    "empty_title": "还没有人发布物品",
+    "empty_description": "从左侧表单开始发第一条，页面会自动生成一张卡片。",
+    "empty_image": "暂无图片预览",
+    "card_label": "Flash Card",
+    "uncategorized": "未分类",
+    "contact_label": "联系方式",
+    "categories": {
+      "handcrafts": "手工作品",
+      "material": "原材料",
+      "idle_items": "闲置杂物"
+    },
+    "form": {
+      "title_label": "标题",
+      "title_placeholder": "例如：转让手工工具套装",
+      "description_label": "物品描述",
+      "description_placeholder": "写清楚物品状态、价格、交易方式或适合谁使用。",
+      "contact_label": "联系方式",
+      "contact_placeholder": "邮箱（必填），微信或 Instagram（选填）",
+      "category_label": "分类（可选）",
+      "category_placeholder": "请选择分类",
+      "image_label": "上传图片（可选）",
+      "image_hint": "支持常见图片格式，单张图片大小不超过 2MB。",
+      "image_preview_alt": "上传图片预览",
+      "image_remove": "移除图片",
+      "image_invalid_type": "请选择图片文件。",
+      "image_too_large": "图片过大，请选择 2MB 以内的图片。",
+      "image_read_error": "图片读取失败，请重试。",
+      "submit": "提交审核",
+      "submit_pending_title": "提交成功",
+      "submit_pending_success": "提交成功，卡片已发送给管理员审核。",
+      "missing_required_title": "信息缺失",
+      "missing_required_message": "请填写所有必填字段后再提交，至少需要补全标题、物品描述和联系方式。",
+      "feedback_confirm": "我知道了"
+    }
   }
 }
