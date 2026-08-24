@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { 
   LayoutDashboard, 
   Megaphone, 
+  Store,
   Calendar as CalendarIcon, 
   LogOut, 
   Plus, 
   Trash2, 
+  CheckCircle2,
+  XCircle,
   MousePointerClick,
   MapPin,
   TrendingUp,
@@ -56,6 +60,18 @@ interface ClubEvent {
   description: string;
 }
 
+interface StorePost {
+  id: string;
+  title: string;
+  description: string;
+  contact: string;
+  category?: 'handcrafts' | 'material' | 'idle_items';
+  imageDataUrl?: string;
+  createdAt: string;
+}
+
+type StoreCategory = StorePost['category'];
+
 // --- Constants ---
 const UIUC_LOCATIONS = [
   "Grainger Engineering Library, Room 401",
@@ -74,6 +90,33 @@ const WORKSHOP_TYPES = [
   "Sealing Wax Workshop",
   "Pipe Cleaners Crafting"
 ];
+
+const STORE_PENDING_KEY = 'store_posts_pending_review';
+const STORE_APPROVED_KEY = 'store_posts_approved';
+
+const readStorePosts = (key: string): StorePost[] => {
+  const raw = localStorage.getItem(key);
+
+  if (!raw) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(raw) as StorePost[];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    localStorage.removeItem(key);
+    return [];
+  }
+};
+
+const normalizeCategory = (value: string): StoreCategory => {
+  if (value === 'handcrafts' || value === 'material' || value === 'idle_items') {
+    return value;
+  }
+
+  return undefined;
+};
 
 // --- Analytics Data ---
 const VISITOR_DATA = [
@@ -94,7 +137,8 @@ const ACTIVITY_DISTRIBUTION = [
 ];
 
 const Admin = () => {
-  const [activeTab, setActiveTab] = useState<'announcements' | 'calendar' | 'dashboard'>('announcements');
+  const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState<'announcements' | 'calendar' | 'dashboard' | 'storeReview'>('announcements');
   const [loading, setLoading] = useState(false);
   const currentUserEmail = localStorage.getItem('adminUserEmail');
   
@@ -104,6 +148,8 @@ const Admin = () => {
   // --- Data State ---
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [events, setEvents] = useState<ClubEvent[]>([]);
+  const [pendingStorePosts, setPendingStorePosts] = useState<StorePost[]>([]);
+  const [approvedStorePosts, setApprovedStorePosts] = useState<StorePost[]>([]);
 
   // --- Form State ---
   const [newAnnouncement, setNewAnnouncement] = useState({ content: '', type: 'general' });
@@ -120,7 +166,13 @@ const Admin = () => {
   useEffect(() => {
     fetchAnnouncements();
     fetchEvents();
+    fetchStorePosts();
   }, []);
+
+  const fetchStorePosts = () => {
+    setPendingStorePosts(readStorePosts(STORE_PENDING_KEY));
+    setApprovedStorePosts(readStorePosts(STORE_APPROVED_KEY));
+  };
 
   const fetchAnnouncements = async () => {
     try {
@@ -263,6 +315,60 @@ const Admin = () => {
     localStorage.removeItem('adminAuthToken');
     localStorage.removeItem('adminUserEmail');
     window.location.href = '/login';
+  };
+
+  const handleApproveStorePost = (id: string) => {
+    const pending = readStorePosts(STORE_PENDING_KEY);
+    const approved = readStorePosts(STORE_APPROVED_KEY);
+    const target = pending.find((post) => post.id === id);
+
+    if (!target) {
+      return;
+    }
+
+    const nextPending = pending.filter((post) => post.id !== id);
+    const nextApproved = [target, ...approved];
+
+    localStorage.setItem(STORE_PENDING_KEY, JSON.stringify(nextPending));
+    localStorage.setItem(STORE_APPROVED_KEY, JSON.stringify(nextApproved));
+    fetchStorePosts();
+  };
+
+  const handleRejectStorePost = (id: string) => {
+    const pending = readStorePosts(STORE_PENDING_KEY);
+    const nextPending = pending.filter((post) => post.id !== id);
+
+    localStorage.setItem(STORE_PENDING_KEY, JSON.stringify(nextPending));
+    fetchStorePosts();
+  };
+
+  const handleDeleteApprovedStorePost = (id: string) => {
+    if (!confirm('Are you sure you want to delete this approved post?')) {
+      return;
+    }
+
+    const approved = readStorePosts(STORE_APPROVED_KEY);
+    const nextApproved = approved.filter((post) => post.id !== id);
+
+    localStorage.setItem(STORE_APPROVED_KEY, JSON.stringify(nextApproved));
+    fetchStorePosts();
+  };
+
+  const handleUpdateStorePostCategory = (storageKey: string, id: string, category: StoreCategory) => {
+    const items = readStorePosts(storageKey);
+    const nextItems = items.map((post) => {
+      if (post.id !== id) {
+        return post;
+      }
+
+      return {
+        ...post,
+        category,
+      };
+    });
+
+    localStorage.setItem(storageKey, JSON.stringify(nextItems));
+    fetchStorePosts();
   };
 
   const upcomingEvents = events.filter(e => new Date(e.start) >= new Date());
@@ -612,6 +718,132 @@ const Admin = () => {
     </div>
   );
 
+  const renderStoreReview = () => (
+    <div className="space-y-8 animate-fadeIn">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <p className="text-sm text-gray-500 mb-1">Pending Review</p>
+          <p className="text-3xl font-bold text-amber-600">{pendingStorePosts.length}</p>
+        </div>
+        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <p className="text-sm text-gray-500 mb-1">Approved</p>
+          <p className="text-3xl font-bold text-emerald-600">{approvedStorePosts.length}</p>
+        </div>
+        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <p className="text-sm text-gray-500 mb-1">Review Rule</p>
+          <p className="text-sm font-medium text-gray-700">Only approved cards appear on /store</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-5 gap-8">
+        <section className="xl:col-span-3">
+          <h3 className="text-lg font-bold text-gray-900 mb-4">Pending Store Posts</h3>
+          <div className="space-y-4">
+            {pendingStorePosts.length === 0 ? (
+              <div className="bg-white p-8 rounded-2xl border border-gray-100 text-center text-gray-500">
+                No pending posts.
+              </div>
+            ) : (
+              pendingStorePosts.map((post) => (
+                <article key={post.id} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                  {post.imageDataUrl ? (
+                    <img
+                      src={post.imageDataUrl}
+                      alt={post.title}
+                      className="mb-4 h-44 w-full rounded-xl object-cover border border-gray-100"
+                    />
+                  ) : null}
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700 border border-amber-100">
+                      {post.category ? t(`store.categories.${post.category}`) : t('store.uncategorized')}
+                    </span>
+                    <span className="text-xs text-gray-400">
+                      {new Date(post.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className="mb-4">
+                    <label className="block text-xs font-semibold text-gray-500 mb-1">{t('store.form.category_label')}</label>
+                    <select
+                      value={post.category || ''}
+                      onChange={(event) => handleUpdateStorePostCategory(STORE_PENDING_KEY, post.id, normalizeCategory(event.target.value))}
+                      className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-300"
+                    >
+                      <option value="">{t('store.uncategorized')}</option>
+                      <option value="handcrafts">{t('store.categories.handcrafts')}</option>
+                      <option value="material">{t('store.categories.material')}</option>
+                      <option value="idle_items">{t('store.categories.idle_items')}</option>
+                    </select>
+                  </div>
+                  <h4 className="font-bold text-gray-900 text-lg mb-2">{post.title}</h4>
+                  <p className="text-gray-600 whitespace-pre-wrap mb-4">{post.description}</p>
+                  <p className="text-sm text-gray-500 mb-5">Contact: <span className="font-medium text-gray-700">{post.contact}</span></p>
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      onClick={() => handleApproveStorePost(post.id)}
+                      className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+                    >
+                      <CheckCircle2 className="w-4 h-4" />
+                      Approve
+                    </button>
+                    <button
+                      onClick={() => handleRejectStorePost(post.id)}
+                      className="inline-flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-200"
+                    >
+                      <XCircle className="w-4 h-4" />
+                      Reject
+                    </button>
+                  </div>
+                </article>
+              ))
+            )}
+          </div>
+        </section>
+
+        <section className="xl:col-span-2">
+          <h3 className="text-lg font-bold text-gray-900 mb-4">Recently Approved</h3>
+          <div className="space-y-3">
+            {approvedStorePosts.length === 0 ? (
+              <div className="bg-white p-8 rounded-2xl border border-gray-100 text-center text-gray-500">
+                No approved posts yet.
+              </div>
+            ) : (
+              approvedStorePosts.slice(0, 8).map((post) => (
+                <div key={post.id} className="bg-white rounded-xl border border-gray-100 p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <span className="inline-flex rounded-full bg-amber-50 px-3 py-1 text-[11px] font-semibold text-amber-700 border border-amber-100 mb-2">
+                        {post.category ? t(`store.categories.${post.category}`) : t('store.uncategorized')}
+                      </span>
+                      <select
+                        value={post.category || ''}
+                        onChange={(event) => handleUpdateStorePostCategory(STORE_APPROVED_KEY, post.id, normalizeCategory(event.target.value))}
+                        className="mb-2 w-full rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-300"
+                      >
+                        <option value="">{t('store.uncategorized')}</option>
+                        <option value="handcrafts">{t('store.categories.handcrafts')}</option>
+                        <option value="material">{t('store.categories.material')}</option>
+                        <option value="idle_items">{t('store.categories.idle_items')}</option>
+                      </select>
+                      <p className="font-semibold text-gray-900 truncate">{post.title}</p>
+                      <p className="text-xs text-gray-500 mt-1 line-clamp-2">{post.description}</p>
+                    </div>
+                    <button
+                      onClick={() => handleDeleteApprovedStorePost(post.id)}
+                      className="flex-shrink-0 text-gray-400 hover:text-red-500 transition-colors"
+                      aria-label="Delete approved post"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
@@ -651,6 +883,13 @@ const Admin = () => {
               <LayoutDashboard className="w-5 h-5" />
               Dashboard
             </button>
+            <button 
+              onClick={() => setActiveTab('storeReview')}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors font-medium ${activeTab === 'storeReview' ? 'bg-indigo-50 text-indigo-700' : 'text-gray-600 hover:bg-gray-50'}`}
+            >
+              <Store className="w-5 h-5" />
+              Store Review
+            </button>
           </nav>
         </div>
 
@@ -684,6 +923,7 @@ const Admin = () => {
         {activeTab === 'dashboard' && renderDashboard()}
         {activeTab === 'announcements' && renderAnnouncements()}
         {activeTab === 'calendar' && renderCalendar()}
+        {activeTab === 'storeReview' && renderStoreReview()}
       </div>
     </div>
   );

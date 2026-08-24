@@ -46,6 +46,10 @@
     "pipe_cleaners": {
       "title": "Pipe Cleaners Crafting",
       "description": "Pipe cleaners are simple, colorful, and surprisingly versatile. In this workshop, you’ll learn easy twisting and shaping techniques to create cute flowers, small decorations, charms, and mini creations you can take home the same day. It’s beginner-friendly, quick to pick up, and perfect for a relaxing social activity. You can follow guided examples or freestyle your own designs, and our team will be there to help you refine shapes and bring your ideas to life."
+    },
+    "three_d_printing": {
+      "title": "3D Printing",
+      "description": "In this activity, you’ll get introduced to the basics of 3D printing, from how digital models are prepared and sliced to how finished pieces are printed, cleaned up, and displayed. We’ll walk through common materials and machines, share beginner-friendly project ideas, and show how 3D printing can turn creative concepts into real objects quickly. Whether you’re curious about modeling, prototyping, or making fun decorative pieces, this is a relaxed and inspiring way to get started."
     }
   },
   "staff": {
@@ -99,7 +103,47 @@
     }
   },
   "store": {
-    "title": "Store",
-    "coming_soon": "Coming Soon"
+    "title": "Swap Board",
+    "badge": "Campus resale and item posts",
+    "intro": "Post items you want to pass along or browse listings shared by other members. Submissions are sent to admin review first and become public after approval.",
+    "publish_title": "Post an item",
+    "publish_description": "Fill in the essentials and submit for review. A card appears in the public list only after admin approval.",
+    "feed_title": "Approved posts",
+    "feed_description": "Only admin-approved cards are shown below.",
+    "count_suffix": "posts",
+    "empty_title": "No items have been posted yet",
+    "empty_description": "Start with the form and the first card will appear automatically.",
+    "empty_image": "No image preview available",
+    "card_label": "Flash Card",
+    "uncategorized": "Uncategorized",
+    "contact_label": "Contact",
+    "categories": {
+      "handcrafts": "Handcrafts",
+      "material": "Material",
+      "idle_items": "Idle Items"
+    },
+    "form": {
+      "title_label": "Title",
+      "title_placeholder": "Example: Craft tool starter kit for sale",
+      "description_label": "Item description",
+      "description_placeholder": "Describe the condition, price, handoff plan, or who this item is good for.",
+      "contact_label": "Contact",
+      "contact_placeholder": "Email (required), WeChat or Instagram (optional)",
+      "category_label": "Category (optional)",
+      "category_placeholder": "Select a category",
+      "image_label": "Upload image (optional)",
+      "image_hint": "Common image formats are supported, up to 2MB.",
+      "image_preview_alt": "Uploaded image preview",
+      "image_remove": "Remove image",
+      "image_invalid_type": "Please choose an image file.",
+      "image_too_large": "Image is too large. Please use an image under 2MB.",
+      "image_read_error": "Failed to read image. Please try again.",
+      "submit": "Submit for review",
+      "submit_pending_title": "Submission received",
+      "submit_pending_success": "Submitted successfully. Your card is now pending admin review.",
+      "missing_required_title": "Missing required information",
+      "missing_required_message": "Please fill in all required fields before submitting. Title, item description, and contact are required.",
+      "feedback_confirm": "Got it"
+    }
   }
 }

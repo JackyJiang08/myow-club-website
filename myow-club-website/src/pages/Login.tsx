@@ -13,7 +13,7 @@ const Login = () => {
 
     const trimmedEmail = email.trim().toLowerCase();
     
-    const allowedEmails = ['jiangyuqing0508@gmail.com', 'jw151@illinois.edu'];
+    const allowedEmails = ['jiangyuqing0508@gmail.com', 'jw151@illinois.edu', 'mul2@illinois.edu'];
     
     // In a real app, this validation should happen on the server/backend
     if (allowedEmails.includes(trimmedEmail)) {

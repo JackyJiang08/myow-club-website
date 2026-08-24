@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     const token = localStorage.getItem('adminAuthToken');
     const email = localStorage.getItem('adminUserEmail');
 
-    const allowedEmails = ['jiangyuqing0508@gmail.com', 'jw151@illinois.edu'];
+    const allowedEmails = ['jiangyuqing0508@gmail.com', 'jw151@illinois.edu', 'mul2@illinois.edu'];
 
     if (token && email && allowedEmails.includes(email)) {
       setIsAuthenticated(true);

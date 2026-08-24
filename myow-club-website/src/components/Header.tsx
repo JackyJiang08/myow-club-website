@@ -14,10 +14,10 @@ const Header = () => {
     { name: t('nav.home'), path: '/' },
     { name: t('nav.calendar'), path: '/calendar' },
     { name: t('nav.activities'), path: '/activities' },
-    { name: t('nav.staff'), path: '/staff' },
-    { name: t('nav.about'), path: '/about' },
     { name: t('nav.store'), path: '/store' },
     { name: t('nav.membership'), path: '/membership' },
+    { name: t('nav.about'), path: '/about' },
+    { name: t('nav.staff'), path: '/staff' },
   ];
 
   const changeLanguage = (lng: string) => {
